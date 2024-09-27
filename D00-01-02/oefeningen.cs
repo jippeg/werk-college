@@ -33,13 +33,13 @@ class Ex2: Exercise {
         }
         int result = 1;
         foreach (int val in nums) result *= val;
-        format_print($"Het resultaat is {result}");
+        format_print($"Het resultaat is {result}\n");
     }
 }
 class Ex3: Exercise {
     public Ex3(): base(3, "Maandsalaris") {}
     public override void start() {
-        format_print("Geef maandsalaris in euro:");
+        format_print("Geef maandsalaris in euro: ");
         decimal salaris;
         decimal.TryParse(Console.ReadLine(), out salaris);
         decimal jaarsalaris = salaris * 12;
