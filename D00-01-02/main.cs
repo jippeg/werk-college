@@ -1,5 +1,6 @@
 ﻿namespace project;
-using System.Diagnostics;
+using _dbg = System.Diagnostics.Debug;
+using _con = System.Console;
 using System.Reflection;
 class Program {
     static void Main(string[] args) {
@@ -20,11 +21,11 @@ class Program {
 class Exercise {
     static public void chainload_exercise_instances_to(ref List<Exercise> to) {
         Assembly assembly = Assembly.GetExecutingAssembly();
-        Func<Type, bool> has_exercise_base = (Type type) => type.IsSubclassOf(typeof(Exercise)); 
-        IEnumerable<Type> found_derivations = assembly.GetTypes().Where(has_exercise_base); 
+        Func<Type, bool> is_exercise_t = (Type type) => type.IsSubclassOf(typeof(Exercise)); 
+        IEnumerable<Type> found_derivations = assembly.GetTypes().Where(is_exercise_t); 
         foreach (var exercise in found_derivations) {
-            var instance = Activator.CreateInstance(exercise) as Exercise;
-            if (instance == null) Debug.Fail($"failed to instantiate {exercise.Name}");
+            Exercise? instance = Activator.CreateInstance(exercise) as Exercise;
+            if (instance == null) _dbg.Fail($"failed to instantiate {exercise.Name}");
             to.Add(instance);
         }
     }
@@ -35,9 +36,9 @@ class Exercise {
     public int nr_ = 0;
     public string title_ = "Oefening";
     virtual public void start() {
-        Debug.Print("nog niet geïmplementeerd.");
+        _dbg.Print("t\not implemented yet.");
     }
     static protected void format_print(string str) {
-        Debug.Write("    " + str);
+        _con.Write("    " + str);
     }
 }
