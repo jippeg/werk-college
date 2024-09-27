@@ -8,7 +8,7 @@ class Program {
         Exercise.chainload_exercise_instances_to(ref exercises);
         if (args.Count() == 2 && args[0] == "oef") present(exercises[int.Parse(args[1]) - 1]);
         else foreach (Exercise exercise in exercises) present(exercise);
-        Console.WriteLine("\nprogram exited.\n");
+        Console.WriteLine("\nprogramma beëindigd.\n");
     }
     static void present(in Exercise ex) {
         print_title_format(ex);
@@ -25,7 +25,7 @@ class Exercise {
         IEnumerable<Type> found_derivations = assembly.GetTypes().Where(is_exercise_t); 
         foreach (var exercise in found_derivations) {
             Exercise? instance = Activator.CreateInstance(exercise) as Exercise;
-            if (instance == null) _dbg.Fail($"Failed to init {exercise.Name}");
+            if (instance == null) _dbg.Fail($"failed to instantiate {exercise.Name}");
             to.Add(instance);
         }
     }
