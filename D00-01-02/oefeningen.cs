@@ -2,14 +2,18 @@ namespace project;
 class Ex1: Exercise {
     public Ex1(): base(1, "Rekenkundige bewerkingen") {}
     public override void start() {
-        print_result(2f + 3 * 4);
-        print_result((2f + 3) * 4);
-        print_result(6f * 3 / 2 * 4);
-        print_result(6f * 3 / (2 * 4));
-        print_result(17f / 8 + 9 % 5 - 3 * 2);
+        result( 2f + 3 * 4 );
+        result( (2f + 3) * 4 );
+        result( 6f * 3 / 2 * 4 );
+        result( 6f * 3 / (2 * 4) );
+        result( 6f * (8 % (2 * 3)) );
+        result( 17f / 8 + 9 % 5 - 3 * 2 );
+        result( 17f / (8 + 9) % (5 - 3) * 2 );
+        result( 12f / (2 * 8 % 4) );
+        result( 20f * 17 / 8 % 4 );
     }
     static uint curr_ = 0;
-    static void print_result<T>(T result) {
+    static void result<T>(T result) {
         format_print($"{curr_++}) resultaat is {result}\n");
     }
 }
@@ -81,8 +85,10 @@ class Ex5: Exercise {
                 continue;
             }
         }
-        for (int i = 0; i < input.Count(); ++i) {
-            format_print($"{input[i]} {notations[i]}\n");
+        int count = input.Count();
+        for (int i = 0; i < count; ++i) {
+            int i_lerp = count - 1 - i;
+            format_print($"{input[i_lerp]} {notations[i]}\n");
         }
     }
     double to_base10(double exponent) {
