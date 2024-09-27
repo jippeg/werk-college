@@ -6,7 +6,7 @@ class Program {
     static void Main(string[] args) {
         var exercises = new List<Exercise>();
         Exercise.chainload_exercise_instances_to(ref exercises);
-        if (args.Count() == 2 && args[0] == "oef") present(exercises[int.Parse(args[1]) - 1/*excl range*/]);
+        if (args.Count() == 2 && args[0] == "oef") present(exercises[int.Parse(args[1]) - 1]);
         else foreach (Exercise exercise in exercises) present(exercise);
         Console.WriteLine("\nprogram exited.\n");
     }
@@ -22,11 +22,10 @@ class Exercise {
     static public void chainload_exercise_instances_to(ref List<Exercise> to) {
         Assembly assembly = Assembly.GetExecutingAssembly();
         Func<Type, bool> is_exercise_t = (Type type) => type.IsSubclassOf(typeof(Exercise)); 
-        IEnumerable<Type> found_derivations = assembly.GetTypes().Where(is_exercise_t); /* somehow is ordered already
-        TODO: test if this is related to declaration order or not */ 
+        IEnumerable<Type> found_derivations = assembly.GetTypes().Where(is_exercise_t); 
         foreach (var exercise in found_derivations) {
             Exercise? instance = Activator.CreateInstance(exercise) as Exercise;
-            if (instance == null) _dbg.Fail($"Failed to init {exercise.Name}");//maybe try cs exceptions for this
+            if (instance == null) _dbg.Fail($"Failed to init {exercise.Name}");
             to.Add(instance);
         }
     }
