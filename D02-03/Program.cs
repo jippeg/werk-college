@@ -107,14 +107,27 @@ class Program {
             return "Postcode";
         };
         //printen van oefeningen
-        int count = ls.data.Count();
-        for (int i = 0; i < count; ++i) {
-            int n = i + 1;
-            Console.WriteLine($"[begin] oefening {n}:");
-            Console.WriteLine($"[einde] {ls.data[i]()} (oefening {n})" );
+        const string oefening_param = "--oefening";
+        if (args.Contains(oefening_param)) {
+            int idx = Array.IndexOf(args, oefening_param);
+            int oef_idx;
+            if (int.TryParse(args[idx + 1], out oef_idx)) {
+                --oef_idx;
+                print_oef(ref ls, oef_idx);
+            }
+        } else {
+            int count = ls.data.Count();
+            for (int i = 0; i < count; ++i) {
+                print_oef(ref ls, i);
+            }
         }
     }
-    public static int ask_int(string? question = null, Func<int, bool>? predicate = null, string? failmsg = null) {
+    static void print_oef(ref readonly Lambdas ls, int idx) {
+        int n = idx + 1;
+        Console.WriteLine($"[begin] oefening {n}:");
+        Console.WriteLine($"[einde] {ls.data[idx]()} (oefening {n})" );
+    }
+    static int ask_int(string? question = null, Func<int, bool>? predicate = null, string? failmsg = null) {
         Console.Write(question ?? "int? ");
         int input;
         _ = int.TryParse(Console.ReadLine(), out input);
