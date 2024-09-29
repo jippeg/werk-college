@@ -1,4 +1,4 @@
-﻿namespace project;
+﻿namespace D02_03;
 class Program {
     static void Main(string[] args) {
         var ls = new Lambdas();

@@ -1,4 +1,4 @@
-﻿namespace project;
+﻿namespace D00_01_02;
 using System.Diagnostics;
 using System.Reflection;
 class Program {
